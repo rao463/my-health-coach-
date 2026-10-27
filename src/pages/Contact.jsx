@@ -1,135 +1,132 @@
 import React, { useState } from "react";
-import { Mail, Phone, ArrowLeft } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { Mail, Phone } from "lucide-react";
+import emailjs from "@emailjs/browser";
 
 const Contact = () => {
-  const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // simple validation
     if (!formData.name || !formData.email || !formData.message) {
-      alert("Please fill out all fields before submitting.");
+      alert("Please fill in all fields.");
       return;
     }
 
-    // simulate message send
-    alert("✅ Thank you! Your message has been sent successfully.");
-    setFormData({ name: "", email: "", message: "" });
+    setLoading(true);
+
+    emailjs
+      .send(
+        "service_9t6qgsy",     
+        "template_lswst1d",     
+        formData,
+        "IWtbhw"       
+      )
+      .then(
+        (response) => {
+          console.log("SUCCESS!", response.status, response.text);
+          setSubmitted(true);
+          setFormData({ name: "", email: "", message: "" });
+          setLoading(false);
+        },
+        (error) => {
+          console.log("FAILED...", error);
+          alert("Oops! Something went wrong. Please try again.");
+          setLoading(false);
+        }
+      );
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white py-16 px-6">
-      <div className="max-w-6xl mx-auto text-center mb-12">
-        <h1 className="text-4xl font-bold text-blue-700 mb-4">Contact Us</h1>
-        <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-          Have a question, suggestion, or feedback? We’d love to hear from you!
-          Fill out the form below, and our team will get back to you soon.
+    <div className="min-h-screen flex flex-col pt-24 px-4 md:px-6 bg-gray-50">
+      <div className="max-w-2xl mx-auto w-full space-y-6">
+        {/* Back Button */}
+        <Link
+          to="/"
+          className="text-blue-600 hover:text-blue-800 font-semibold mb-4 inline-block"
+        >
+          &larr; Back to Home
+        </Link>
+
+        {/* Header */}
+        <h1 className="text-3xl font-bold text-blue-700 text-center">
+          Contact Us
+        </h1>
+        <p className="text-gray-600 text-center">
+          Have questions or feedback? Send us a message and we’ll get back to you!
         </p>
-      </div>
 
-      {/* Contact Info + Form Section */}
-      <div className="grid md:grid-cols-2 gap-10 max-w-6xl mx-auto bg-white shadow-lg rounded-2xl p-8 md:p-12">
-        {/* Left - Contact Info */}
-        <div className="space-y-6">
-          <h2 className="text-2xl font-semibold text-blue-700 mb-4">
-            Get in Touch
-          </h2>
-          <p className="text-gray-600">
-            Our support team is available to help with any inquiries regarding
-            your account, features, or general feedback.
-          </p>
-
-          <a
-            href="mailto:razanousman06@gmail.com"
-            className="flex items-center space-x-4 text-gray-700 hover:text-blue-600"
-          >
+        {/* Contact Info */}
+        <div className="space-y-4 text-gray-700">
+          <div className="flex items-center space-x-4">
             <Mail className="w-6 h-6 text-blue-600" />
             <span>razanousman06@gmail.com</span>
-          </a>
-
-          <a
-            href="tel:+96170123456"
-            className="flex items-center space-x-4 text-gray-700 hover:text-blue-600"
-          >
+          </div>
+          <div className="flex items-center space-x-4">
             <Phone className="w-6 h-6 text-blue-600" />
-            <span>+961 03 13 40 64</span>
-          </a>
+            <span>+961 3 13 40 64</span>
+          </div>
         </div>
 
-        {/* Right - Contact Form */}
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div>
-            <label className="block text-gray-700 font-medium mb-2">
-              Full Name
-            </label>
+        {/* Contact Form */}
+        {!submitted ? (
+          <form
+            onSubmit={handleSubmit}
+            className="bg-white p-6 rounded-2xl shadow-md space-y-4"
+          >
             <input
               type="text"
               name="name"
+              placeholder="Your Name"
               value={formData.name}
               onChange={handleChange}
-              placeholder="Enter your name"
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+              className="w-full border p-3 rounded-lg focus:ring-2 focus:ring-blue-400 outline-none"
             />
-          </div>
-
-          <div>
-            <label className="block text-gray-700 font-medium mb-2">Email</label>
             <input
               type="email"
               name="email"
+              placeholder="Your Email"
               value={formData.email}
               onChange={handleChange}
-              placeholder="Enter your email"
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+              className="w-full border p-3 rounded-lg focus:ring-2 focus:ring-blue-400 outline-none"
             />
-          </div>
-
-          <div>
-            <label className="block text-gray-700 font-medium mb-2">
-              Message
-            </label>
             <textarea
-              rows="5"
               name="message"
+              placeholder="Your Message"
               value={formData.message}
               onChange={handleChange}
-              placeholder="Write your message..."
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
-            ></textarea>
+              rows={5}
+              className="w-full border p-3 rounded-lg focus:ring-2 focus:ring-blue-400 outline-none"
+            />
+            <button
+              type="submit"
+              disabled={loading}
+              className={`w-full px-4 py-3 rounded-lg text-white ${
+                loading ? "bg-gray-400" : "bg-blue-600 hover:bg-blue-700"
+              } transition`}
+            >
+              {loading ? "Sending..." : "Send Message"}
+            </button>
+          </form>
+        ) : (
+          <div className="bg-green-100 text-green-700 p-6 rounded-2xl text-center shadow-md">
+            <h2 className="text-xl font-semibold">Thank you!</h2>
+            <p className="mt-2">Your message has been sent successfully.</p>
+            <button
+              onClick={() => setSubmitted(false)}
+              className="mt-4 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
+            >
+              Send Another Message
+            </button>
           </div>
-
-          <button
-            type="submit"
-            className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition font-semibold"
-          >
-            Send Message 
-          </button>
-        </form>
-      </div>
-
-      {/* Back Button */}
-      <div className="max-w-6xl mx-auto mt-10 text-center">
-        <button
-          onClick={() => navigate("/")}
-          className="inline-flex items-center px-6 py-3 bg-blue-700 text-white rounded-lg hover:bg-blue-800 transition font-medium"
-        >
-          <ArrowLeft className="w-5 h-5 mr-2" />
-          Back to Home
-        </button>
+        )}
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 const Nutrition = require("../models/Nutrition");
 const { OpenAI } = require("openai");
-const { sendWebPushToUser } = require("../services/notificationService");
+const { sendToUser } = require("../utils/sendPushNotification");
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
@@ -47,7 +47,7 @@ const addNutrition = async (req, res) => {
     await nutrition.save();
 
     // Send push notification
-    await sendWebPushToUser(req.user._id, {
+    await sendToUser(req.user._id, {
       title: "New Nutrition Record Added",
       body: aiAdvice,
       url: "/nutrition"

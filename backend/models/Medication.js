@@ -7,7 +7,9 @@ const MedicationSchema = new mongoose.Schema({
   frequency: { type: String, required: true }, // e.g., "2 times a day"
   startDate: { type: Date, required: true },
   endDate: { type: Date },
-  aiRecommendation: { type: String, default: "" }, // optional AI advice
+  times: [{ type: String }], // e.g., ["08:00", "14:00", "20:00"]
+  timezone: { type: String, default: "UTC" }, // user's timezone
+  aiReminder: { type: String, default: "" }, // AI-generated reminder message
   createdAt: { type: Date, default: Date.now }
 });
 

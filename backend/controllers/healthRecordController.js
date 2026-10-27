@@ -1,6 +1,6 @@
 const HealthRecord = require("../models/HealthRecord");
 const { OpenAI } = require("openai");
-const { sendWebPushToUser } = require("../services/notificationService");
+const { sendToUser } = require("../utils/sendPushNotification");
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
@@ -43,7 +43,7 @@ const addHealthRecord = async (req, res) => {
 
     await record.save();
 
-    await sendWebPushToUser(req.user._id, {
+    await sendToUser(req.user._id, {
       title: "New Health Record Added",
       body: aiAdvice,
       url: "/health-record"

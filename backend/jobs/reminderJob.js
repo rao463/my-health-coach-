@@ -4,7 +4,7 @@ const moment = require("moment-timezone");
 const Medication = require("../models/Medication");
 const User = require("../models/User");
 const { sendEmail } = require("../services/emailService");
-const { sendWebPushToUser } = require("../services/notificationService");
+const { sendToUser } = require("../utils/sendPushNotification");
 
 // Run every minute
 const reminderJob = cron.schedule("* * * * *", async () => {
@@ -60,7 +60,7 @@ const reminderJob = cron.schedule("* * * * *", async () => {
 
       // Send web push notification
       try {
-        await sendWebPushToUser(user._id, payload);
+        await sendToUser(user._id, payload);
       } catch (err) {
         console.error("Push send error:", err);
       }

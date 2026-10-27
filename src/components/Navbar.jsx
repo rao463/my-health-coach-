@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Menu, X, LogOut } from "lucide-react";
+import { Menu, X, LogOut, User } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
@@ -27,8 +27,14 @@ const Navbar = () => {
   return (
     <nav className="bg-white shadow-md fixed w-full top-0 left-0 z-50">
       <div className="container mx-auto px-6 py-3 flex items-center justify-between">
-        {/* Logo */}
-        <div className="text-2xl font-bold text-blue-600">My Health Coach</div>
+        {/* Clickable Logo from public folder */}
+        <Link to="/">
+          <img
+            src="/logo.png" // logo file in public folder
+            alt="My Health Coach Project Logo"
+            style={{ height: "70px", width: "90px", marginRight: "60px" }} 
+          />
+        </Link>
 
         {/* Desktop Menu */}
         <ul className="hidden md:flex space-x-6 text-gray-700 font-medium">
@@ -40,6 +46,11 @@ const Navbar = () => {
             <>
               <li>
                 <Link to="/dashboard" className="hover:text-blue-600">Dashboard</Link>
+              </li>
+              <li>
+                <Link to="/profile" className="flex items-center gap-1 hover:text-blue-600">
+                  <User size={18} /> Profile
+                </Link>
               </li>
               <li>
                 <button
@@ -57,7 +68,7 @@ const Navbar = () => {
               <li>
                 <Link
                   to="/login"
-                  className="hover:text-blue-600 border border-blue-600 px-3 py-1 rounded"
+                  className="hover:text-white hover:bg-blue-600 bg-blue-600 text-white px-3 py-1 rounded"
                 >
                   Login
                 </Link>
@@ -96,6 +107,11 @@ const Navbar = () => {
                     <Link to="/dashboard" className="hover:text-blue-600">Dashboard</Link>
                   </li>
                   <li>
+                    <Link to="/profile" className="flex items-center gap-1 hover:text-blue-600">
+                      <User size={18} /> Profile
+                    </Link>
+                  </li>
+                  <li>
                     <button
                       onClick={handleLogout}
                       className="flex items-center gap-1 hover:text-red-600"
@@ -126,6 +142,14 @@ const Navbar = () => {
                   </li>
                 </>
               )}
+
+              {/* Additional Links */}
+              <li>
+                <Link to="/ai-chat" className="hover:text-blue-600">AI Chat Coach</Link>
+              </li>
+              <li>
+                <Link to="/symptom-checker" className="hover:text-blue-600">AI Symptom Checker</Link>
+              </li>
             </ul>
           </div>
         )}
@@ -135,4 +159,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-

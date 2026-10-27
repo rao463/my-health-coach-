@@ -1,6 +1,6 @@
 const MentalHealth = require("../models/MentalHealth");
 const { OpenAI } = require("openai");
-const { sendWebPushToUser } = require("../services/notificationService");
+const { sendToUser } = require("../utils/sendPushNotification");
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
@@ -42,7 +42,7 @@ const addMentalHealth = async (req, res) => {
 
     await record.save();
 
-    await sendWebPushToUser(req.user._id, {
+    await sendToUser(req.user._id, {
       title: "Mental Health Update",
       body: aiAdvice,
       url: "/mental-health"

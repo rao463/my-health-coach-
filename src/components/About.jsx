@@ -25,7 +25,7 @@ const About = () => {
         {/* Right Side - Image */}
         <div className="md:w-1/2 flex justify-center">
           <img
-            src="https://img.freepik.com/free-vector/healthcare-technology-illustration_23-2148888659.jpg"
+            src="/image1.png"
             alt="About Health Assistant"
             className="rounded-2xl shadow-lg w-full max-w-md"
           />

@@ -1,6 +1,6 @@
 const Medication = require("../models/Medication");
 const { OpenAI } = require("openai");
-const { sendWebPushToUser } = require("../services/notificationService");
+const { sendToUser } = require("../utils/sendPushNotification");
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
@@ -50,7 +50,7 @@ const addMedication = async (req, res) => {
     await newMedication.save();
 
     // Send push notification
-    await sendWebPushToUser(req.user._id, {
+    await sendToUser(req.user._id, {
       title: "Medication Added",
       body: aiReminder,
       url: "/medication"
