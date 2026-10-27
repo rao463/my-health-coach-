@@ -1,117 +1,155 @@
-My Health Coach 🩺
+# My Health Coach
 
-My Health Coach is an AI-powered health assistant web application developed as a Computer Science graduation project. It helps users organize their health information, track daily wellness activities, and access personalized health guidance through a web-based platform.
+**An AI-Powered Personal Health Assistant**
 
-✨ Features
-AI Symptom Checker: Explore possible explanations for reported symptoms and receive general health guidance.
-Maya AI Assistant: Interact with an AI-powered assistant for health and wellness support.
-Medication Reminders: Manage medications and keep track of medication schedules.
-Nutrition Tracking: Record and monitor nutrition-related information.
-Fitness Tracking: Track fitness activities and receive personalized activity suggestions.
-Mental Health Support: Access general mental wellness guidance.
-Health Record Management: Organize personal health records.
-User Authentication: Registration and login functionality.
-Responsive Interface: A user-friendly interface designed for convenient access across screen sizes.
-🛠️ Technologies Used
+My Health Coach is a full-stack web application developed as a Computer Science graduation project at Arab Open University (AOU), Lebanon. The platform aims to help users manage their health information, monitor daily wellness habits, and access AI-assisted health and lifestyle guidance through a centralized, user-friendly interface.
 
-Frontend
+## Overview
 
-React.js
-JavaScript
-Tailwind CSS
-React Router
-Lucide React
+Managing personal health information across different tools can be challenging. My Health Coach brings essential health and wellness features together in one platform, supporting users in organizing health records, tracking daily habits, and receiving general guidance.
 
-Backend
+## Key Features
 
-Node.js
-Express.js
-REST APIs
+* **AI Symptom Checker** — Explore possible explanations for reported symptoms and receive general health information.
+* **Maya AI Assistant** — An AI-powered assistant designed to provide general health and wellness guidance.
+* **Medication Management** — Organize medication information and reminders.
+* **Nutrition Tracking** — Record and monitor nutrition-related information.
+* **Fitness Tracking** — Track fitness activities and receive activity suggestions.
+* **Mental Wellness Support** — Access general mental wellness guidance.
+* **Health Record Management** — Organize personal health information and records.
+* **User Authentication** — Registration and login functionality.
+* **Responsive User Interface** — A clean interface designed for convenient use across different screen sizes.
 
-Database
+## Technology Stack
 
-MongoDB
-Mongoose
+| Area              | Technologies                       |
+| ----------------- | ---------------------------------- |
+| Frontend          | React.js, JavaScript, Tailwind CSS |
+| Navigation and UI | React Router, Lucide React         |
+| Backend           | Node.js, Express.js                |
+| Database          | MongoDB, Mongoose                  |
+| AI Integration    | Ollama, Gemma 3 1B                 |
+| Development Tools | Visual Studio Code, npm, Postman   |
 
-AI Integration
+## Project Structure
 
-Ollama
-Gemma 3 1B (gemma3:1b)
-📂 Project Structure
+```text
 my-health-coach/
-├── backend/       # Backend server, API routes, and models
-├── components/    # Shared UI components
-├── public/        # Public assets and PWA files
-├── src/           # React application source code
-├── package.json   # Frontend dependencies and scripts
-└── README.md      # Project documentation
-🚀 Getting Started
-Prerequisites
+├── backend/
+│   ├── config/
+│   ├── controllers/
+│   ├── middleware/
+│   ├── models/
+│   ├── routes/
+│   ├── services/
+│   ├── utils/
+│   └── server.js
+├── components/
+├── public/
+├── src/
+├── package.json
+└── README.md
+```
 
-Install or prepare the following:
+## Getting Started
 
-Node.js and npm
-MongoDB Atlas or a compatible MongoDB instance
-Ollama for local AI integration
-1. Clone the Repository
+### Prerequisites
+
+Make sure you have installed:
+
+* [Node.js](https://nodejs.org/)
+* npm, included with Node.js
+* [MongoDB Atlas](https://www.mongodb.com/atlas) or a compatible MongoDB deployment
+* [Ollama](https://ollama.com/) for local AI functionality
+
+### 1. Clone the Repository
+
+```bash
 git clone https://github.com/rao463/my-health-coach-.git
 cd my-health-coach-
-2. Install Frontend Dependencies
+```
+
+### 2. Install Frontend Dependencies
 
 From the project root directory, run:
 
+```bash
 npm install
-3. Install Backend Dependencies
+```
+
+### 3. Install Backend Dependencies
+
+```bash
 cd backend
 npm install
-4. Configure Environment Variables
+```
 
-Create or update backend/.env using the environment variable names expected by the backend code.
+### 4. Configure Environment Variables
 
-Configure the MongoDB connection string and any other required settings. Keep passwords, API keys, tokens, and other secrets private. Never commit your .env file to GitHub.
+Create or configure the `backend/.env` file using the variable names required by the backend code.
 
-5. Start the Backend
+Configure the MongoDB connection string and any other required environment variables. Keep credentials and API keys private, and never commit the `.env` file to GitHub.
 
-From the backend directory, run:
+### 5. Start the Backend
 
+From the `backend` directory, run:
+
+```bash
 npm start
+```
 
 Keep the terminal open while the backend is running.
 
-6. Start the Frontend
+### 6. Start the Frontend
 
-Open a second terminal in the project root directory and run:
+Open a separate terminal in the project root directory and run:
 
+```bash
 npm start
+```
 
-The React development server normally opens at:
+The React development server is normally available at:
 
 http://localhost:3000
 
-7. Configure Ollama
+### 7. Set Up the AI Model
 
-Start Ollama and ensure the required model is available:
+Ensure Ollama is installed and the required model is available:
 
+```bash
 ollama pull gemma3:1b
+```
+
+Test the model with:
+
+```bash
 ollama run gemma3:1b
+```
 
-The backend must be configured to connect to the local Ollama service. AI features may not work until the backend connection, model configuration, and required services are available.
+The backend must also be configured to communicate with the local Ollama service. AI functionality depends on the backend configuration and the availability of the required services.
 
-🔒 Privacy and Medical Disclaimer
+## Security and Medical Disclaimer
 
-My Health Coach is an educational graduation project intended to support personal health organization and general wellness awareness. Its AI-generated information is not a medical diagnosis and does not replace advice from qualified healthcare professionals.
+My Health Coach is an educational software project intended to support health information organization and general wellness awareness. AI-generated responses are informational only and do not constitute medical diagnosis or treatment. The application does not replace professional medical advice.
 
-Users should avoid entering sensitive personal health information into an environment that is not appropriately secured.
+Do not enter sensitive health information into an environment unless it is appropriately secured.
 
-🎓 Project Information
+## Future Enhancements
 
-Developed as a Computer Science graduation project at Arab Open University (AOU), Lebanon.
+* Improve AI response quality and personalization.
+* Expand language support.
+* Enhance medication reminders and notifications.
+* Strengthen security and privacy protections.
+* Introduce additional wellness analytics and tracking capabilities.
+* Evaluate usability and accessibility through user testing.
 
-📌 Future Improvements
-Improve AI responses and personalization.
-Enhance notifications and reminders.
-Expand multilingual support.
-Improve data security and user experience.
-Explore additional health tracking and analytics features.
+## Academic Project
 
-My Health Coach — Supporting healthier habits through technology.
+**Project:** My Health Coach
+**Institution:** Arab Open University (AOU), Lebanon
+**Program:** Bachelor of Science in Computer Science
+
+---
+
+*My Health Coach — Bringing health information and wellness guidance together in one platform.*
+
